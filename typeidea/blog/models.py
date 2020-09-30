@@ -24,6 +24,9 @@ class Category(models.Model):
     class Meta:
         verbose_name = verbose_name_plural = '分类'
 
+    def __str__(self):
+        return self.name
+
 class Tag(models.Model):
     STATUS_NORMAL = 1
     STATUS_DELETE = 0
@@ -32,7 +35,7 @@ class Tag(models.Model):
         (STATUS_DELETE,'删除'),
     )
 
-    name = models.CharField(max_length=10,verbose_name='姓名')
+    name = models.CharField(max_length=10,verbose_name='名称')
     status = models.PositiveIntegerField(
         default=STATUS_NORMAL,
         choices=STATUS_ITEMS,
@@ -43,6 +46,10 @@ class Tag(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = '标签'
+
+    def __str__(self):
+        return self.name
+
 
 class Post(models.Model):
     STATUS_NORMAL = 1
@@ -70,3 +77,6 @@ class Post(models.Model):
     class Meta:
         verbose_name_plural = verbose_name ='文章'
         ordering = ['-id']
+
+    def __str__(self):
+        return self.title

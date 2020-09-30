@@ -18,11 +18,18 @@ class Link(models.Model):
         verbose_name='状态',
         choices=STATUS_ITEMS,
     )
+    weight = models.PositiveIntegerField(
+        default=1,choices=zip(range(1,6),range(1,6)),
+        verbose_name='权重',help_text='权重高展示顺序靠前'
+    )
     owner = models.ForeignKey(User,verbose_name='作者',on_delete=models.CASCADE)
     create_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
 
     class Meta:
         verbose_name_plural = verbose_name = '友链'
+
+    def __str__(self):
+        return self.title
 
 class SideBar(models.Model):
     STATUS_SHOW = 1
@@ -54,3 +61,6 @@ class SideBar(models.Model):
 
     class Meta:
         verbose_name_plural = verbose_name = '侧边栏'
+
+    def __str__(self):
+        return self.title
